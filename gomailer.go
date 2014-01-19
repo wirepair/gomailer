@@ -56,9 +56,7 @@ func New(server, path string) *Gomail {
 // Safely adds new templates to the mailer object. Returns an error if the template
 // fails to parse properly.
 func (g *Gomail) Add(templates []string) error {
-	defer func() {
-		g.Unlock()
-	}()
+	defer g.Unlock()
 
 	var err error
 
@@ -90,9 +88,7 @@ func (g *Gomail) PlainAuth(identity, username, password, host string) {
 
 // adds the passed in auth to our Gomail object with synchronization.
 func (g *Gomail) addAuth(auth smtp.Auth) {
-	defer func() {
-		g.Unlock()
-	}()
+	defer g.Unlock()
 
 	g.Lock()
 	g.auth = auth
@@ -102,7 +98,10 @@ func (g *Gomail) addAuth(auth smtp.Auth) {
 // returns an error if the template fails to execute or the mail itself fails to be
 // sent.
 func (g *Gomail) Send(mailData interface{}, sender, recipient, templateName string) error {
+	defer g.RUnlock()
+
 	mail := new(bytes.Buffer)
+	g.RLock()
 	if err := g.tmpl.ExecuteTemplate(mail, templateName, mailData); err != nil {
 		return err
 	}
