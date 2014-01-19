@@ -1,0 +1,12 @@
+From: {{.From}}
+To: {{.To}}
+Subject: {{.Subject}}
+
+Hello,
+
+Someone at {{.Ip}} has attempted to register you an account at MonkeyGoat Studios. If this was you, congratulations! You simply need to click the below URL to finalize the registration process. If your email client was written in 1990, you may need to type in the following URL: {{.Url}}{{.Token}}
+
+Otherwise, click here: <a href="{{.Url}}{{.Token}}">{{.Url}}{{.Token}}</a>
+
+Thank you!
+- MonkeyGoat Studios.

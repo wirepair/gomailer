@@ -1,0 +1,7 @@
+From: {{.From}}
+To: {{.To}}
+Subject: {{.Subject}}
+
+Hello,
+
+Someone at {{.Ip}} has attempted to register your email address in our system. If this was you, please note you already have an account and disregard this email. If this wasn't you, please make sure your password is strong and has not been used in any other systems as an attacker may be targetting you. 
