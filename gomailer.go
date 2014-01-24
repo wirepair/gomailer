@@ -32,6 +32,14 @@ import (
 	"text/template"
 )
 
+// Gomail interface
+type Gomailer interface {
+	Add(templates []string) error
+	MD5Auth(username, secret string)
+	PlainAuth(identity, username, password, host string)
+	Send(mailData interface{}, sender, recipient, templateName string) error
+}
+
 // Gomail structure to hold template and server information for sending simple
 // templated emails.
 type Gomail struct {
